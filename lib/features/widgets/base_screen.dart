@@ -13,64 +13,67 @@ class BaseScreen extends StatelessWidget {
       {super.key,
       required this.child,
       this.showGradient = false,
-      this.padding});
+      this.padding = const EdgeInsets.symmetric(),
+      });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: SafeArea(
         top: false,
         bottom: false,
         child: showGradient
             ? Stack(
-              alignment: Alignment.topCenter,
-              children: <Widget>[
-                Positioned(
-                  left: 0.w,
-                  bottom: 0.h,
-                  child: Container(
-                    height: 300.h,
-                    width: 300.w,
-                    decoration: const BoxDecoration(
-                      gradient: AppColors.onboardingGradient,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 70.w,
-                  bottom: 100.h,
-                  child: Container(
-                    height: 250.h,
-                    width: 250.w,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.lightBlue,
-                    ),
+                alignment: Alignment.topCenter,
+                children: <Widget>[
+                  Positioned(
+                    left: -50.w,
+                    top: -50.h,
                     child: Container(
-                      decoration: const BoxDecoration(
+                      height: 250.h,
+                      width: 250.w,
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.transparent,
+                        color: AppColors.green.withOpacity(0.7),
+                      ),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.transparent,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.transparent,
+                  Positioned(
+                    right: -120.w,
+                    top: 100.h,
+                    child: Container(
+                      height: 300.h,
+                      width: 300.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.blue.withOpacity(0.6),
+                      ),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.transparent,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  width: double.maxFinite,
-                  padding: padding,
-                  child: child,
-                ),
-              ],
-            )
+                  BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 150, sigmaY: 150),
+                    child: Container(),
+                  ),
+                  Container(
+                    width: double.maxFinite,
+                    padding: padding,
+                    child: child,
+                  ),
+                ],
+              )
             : child,
       ),
     );

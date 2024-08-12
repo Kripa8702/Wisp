@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wisp_app/constants/assets_constants.dart';
-import 'package:wisp_app/features/splash/bloc/splash_bloc.dart';
+import 'package:wisp_app/features/splash/cubit/splash_cubit.dart';
 import 'package:wisp_app/features/widgets/custom_image_view.dart';
-import 'package:wisp_app/theme/app_colors.dart';
 import 'package:wisp_app/utils/size_utils.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   static Widget builder(BuildContext context) {
-    return BlocProvider<SplashBloc>(
-      create: (context) => SplashBloc()
-        ..add(
-          SplashInitial(context),
-        ),
+    return BlocProvider<SplashCubit>(
+      create: (context) => SplashCubit()
+        ..onInitialize(context),
       child: const SplashScreen(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SplashBloc, SplashState>(
+    return BlocBuilder<SplashCubit, SplashState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.darkBlue,
           body: SafeArea(
             bottom: false,
             child: SizedBox(

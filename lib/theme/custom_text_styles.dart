@@ -26,7 +26,7 @@ class CustomTextStyles {
   static TextStyle headlineMedium = TextStyle(
     color: AppColors.primaryTextColor,
     fontSize: 28.fSize,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
   );
   static TextStyle labelLarge = TextStyle(
     color: AppColors.primaryTextColor.withOpacity(0.4),

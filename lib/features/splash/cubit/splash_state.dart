@@ -1,4 +1,4 @@
-part of 'splash_bloc.dart';
+part of 'splash_cubit.dart';
 
 enum SplashStatus { initial, loading, loaded, error }
 

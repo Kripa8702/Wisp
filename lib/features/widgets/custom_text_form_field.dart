@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wisp_app/theme/app_colors.dart';
+import 'package:wisp_app/theme/custom_text_styles.dart';
 import 'package:wisp_app/utils/size_utils.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -11,21 +11,16 @@ class CustomTextFormField extends StatefulWidget {
     this.controller,
     this.focusNode,
     this.autofocus = false,
-    this.textStyle,
     this.obscureText = false,
     this.textInputAction = TextInputAction.next,
     this.textInputType = TextInputType.text,
     this.maxLines,
     this.hintText,
-    this.hintStyle,
     this.prefix,
     this.prefixConstraints,
     this.suffix,
     this.suffixConstraints,
-    this.contentPadding,
     this.borderDecoration,
-    this.fillColor,
-    this.filled = false,
     this.validator,
     this.onChanged,
     this.onSubmitted,
@@ -45,8 +40,6 @@ class CustomTextFormField extends StatefulWidget {
 
   final bool? autofocus;
 
-  final TextStyle? textStyle;
-
   final bool? obscureText;
 
   final TextInputAction? textInputAction;
@@ -57,8 +50,6 @@ class CustomTextFormField extends StatefulWidget {
 
   final String? hintText;
 
-  final TextStyle? hintStyle;
-
   final Widget? prefix;
 
   final BoxConstraints? prefixConstraints;
@@ -67,13 +58,7 @@ class CustomTextFormField extends StatefulWidget {
 
   final BoxConstraints? suffixConstraints;
 
-  final EdgeInsets? contentPadding;
-
   final InputBorder? borderDecoration;
-
-  final Color? fillColor;
-
-  final bool? filled;
 
   final FormFieldValidator<String>? validator;
 
@@ -106,14 +91,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           controller: widget.controller,
           autofocus: widget.autofocus!,
-          style: widget.textStyle ??
-              TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 14.fSize,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-              ),
-          obscureText: (widget.obscureText ?? false)? !passwordVisible : false,
+          style: CustomTextStyles.bodySmall.copyWith(color: Colors.white),
+          obscureText: (widget.obscureText ?? false) ? !passwordVisible : false,
           textInputAction: widget.textInputAction,
           keyboardType: widget.textInputType,
           maxLines: widget.maxLines ?? 1,
@@ -125,14 +104,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       );
 
   InputDecoration get decoration => InputDecoration(
-        hintText: widget.hintText ?? "",
-        hintStyle: widget.hintStyle ??
-            TextStyle(
-              color: AppColors.primaryColor.withOpacity(0.4),
-              fontSize: 14.fSize,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w500,
-            ),
+        label: Text(widget.hintText ?? ""),
+        labelStyle: CustomTextStyles.bodySmall,
         prefixIcon: widget.prefix,
         prefixIconConstraints: widget.prefixConstraints,
         suffixIcon: (widget.obscureText ?? false)
@@ -143,52 +116,37 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   });
                 },
                 icon: Icon(
-                  passwordVisible
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                  color: AppColors.primaryColor.withOpacity(0.4),
+                  passwordVisible ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.white.withOpacity(0.4),
                 ),
-        )
+              )
             : (widget.suffix),
         suffixIconConstraints: widget.suffixConstraints,
         isDense: true,
-        contentPadding: widget.contentPadding ?? EdgeInsets.all(19.w),
-        fillColor: widget.fillColor,
-        filled: widget.filled,
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
         border: widget.borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14.w),
+              borderRadius: BorderRadius.circular(50),
               borderSide: BorderSide(
-                color: AppColors.primaryColor.withOpacity(0.1),
+                color: Colors.white.withOpacity(0.1),
                 width: 1,
               ),
             ),
         enabledBorder: widget.borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14.w),
+              borderRadius: BorderRadius.circular(50),
               borderSide: BorderSide(
-                color: AppColors.primaryColor.withOpacity(0.1),
+                color: Colors.white.withOpacity(0.1),
                 width: 1,
               ),
             ),
         focusedBorder: widget.borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14.w),
+              borderRadius: BorderRadius.circular(50),
               borderSide: const BorderSide(
-                color: AppColors.primaryColor,
+                color: Colors.white,
                 width: 1,
               ),
             ),
-      );
-}
-
-/// Extension for [CustomTextFormField] to get different styles
-extension TextFormFieldStyleHelper on CustomTextFormField {
-  static OutlineInputBorder get outlineOnPrimaryTL14 => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14.w),
-        borderSide: BorderSide(
-          color: AppColors.primaryColor.withOpacity(0.1),
-          width: 1,
-        ),
       );
 }

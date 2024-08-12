@@ -4,24 +4,14 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wisp_app/features/onboarding/view/onboarding_screen.dart';
-import 'package:wisp_app/routing/app_routes.dart';
-import 'package:wisp_app/services/navigator_service.dart';
-
-part 'splash_event.dart';
+import 'package:wisp_app/features/auth/view/login_screen.dart';
 
 part 'splash_state.dart';
 
-class SplashBloc extends Bloc<SplashEvent, SplashState> {
-  SplashBloc() : super(const SplashState()) {
-    on<SplashInitial>(_onInitialize);
-  }
+class SplashCubit extends Cubit<SplashState> {
+  SplashCubit() : super(const SplashState());
 
-  _onInitialize(
-    SplashInitial event,
-    Emitter<SplashState> emit,
-  ) async {
-
+  onInitialize(BuildContext context) async {
     Future.delayed(const Duration(milliseconds: 3000), () {
       // if (event.context.read<AuthRepository>().isSignedIn) {
       //   NavigatorService.pushNamedAndRemoveUntil(
@@ -29,13 +19,13 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       //   );
       // } else {
       Navigator.push(
-        event.context,
+        context,
         PageRouteBuilder(
           transitionDuration: const Duration(milliseconds: 1000),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
-          pageBuilder: (context, __, ___) => OnBoardingScreen.builder(context),
+          pageBuilder: (context, __, ___) => LoginScreen.builder(context),
         ),
       );
       // }

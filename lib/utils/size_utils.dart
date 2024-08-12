@@ -113,3 +113,13 @@ extension FormatExtension on double {
 }
 
 enum DeviceType { mobile, tablet, desktop }
+
+extension SizedBoxExtension on double {
+  /// This method is used to set padding/margin (for the left and Right side) &
+  /// width of the screen or widget according to the Viewport width.
+  SizedBox get widthBox => SizedBox(width: w);
+
+  /// This method is used to set padding/margin (for the top and bottom side) &
+  /// height of the screen or widget according to the Viewport height.
+  SizedBox get heightBox => SizedBox(height: h);
+}
